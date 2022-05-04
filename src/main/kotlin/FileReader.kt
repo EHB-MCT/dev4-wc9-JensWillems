@@ -6,7 +6,42 @@ class FileReader {
         var file = File(url).readLines()
         //println(file);
         val inputList = file.map { it.toInt() }
-        return inputList;
+
+        val length = inputList.size;
+        println("length is " + length);
+        var measurementPart1 = 0;
+
+
+        //for (i in inputList.indices){
+        //if(i + 1 != 2000){
+          //     if( inputList[i] < inputList[i + 1]){
+                  // measurementPart1 += 1;
+           // }
+          // }
+
+          //println(measurementPart1);
+       // }
+
+
+        var measurementPart2 = 0;
+        for(i in inputList.indices){
+            if(i < 1997){
+
+                var sumA= inputList[i] + inputList[i + 1] + inputList[i + 2 ]
+                var sumB= inputList[i + 1] + inputList[i + 2] + inputList[i + 3 ]
+                //println(sumA);
+                //print(sumB);
+                if(sumA < sumB){
+                    measurementPart2 += 1;
+                }
+            }
+
+        }
+        println("Answer Part 2: "+ measurementPart2)
+
+       return inputList;
+
+
     }
 
     fun getPuzzle2(): List<List<Any>> {
@@ -17,6 +52,22 @@ class FileReader {
             val splittedString = it.split(' ')
             inputList.add(listOf<Any>(splittedString[0], splittedString[1].toInt()))
         }
+
+        var x = 0;
+        var y = 0;
+
+        inputList.forEach {
+        val direction = it[0] as String
+        val amount = it[1] as Int
+
+        when(direction){
+            "forward" -> x += amount
+            "down" -> y += amount
+            "up" -> y -= amount
+        }
+        }
+        val answer = x * y;
+        print(answer)
         return inputList
     }
 
@@ -30,6 +81,7 @@ class FileReader {
             val intList = charArray.map{it -> it.digitToInt() }
             inputList.add(intList)
         }
+
         return inputList
     }
 
